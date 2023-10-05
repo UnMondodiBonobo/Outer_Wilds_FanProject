@@ -174,7 +174,6 @@ void ASolarSystemMediator::Tick(float DeltaSeconds)
 			PlanetData.PivotPlanet->GetPlanetMass());
 
 		PlanetData.InfluencedPlanet->ApplyGravitationalForce(GravitationalForce);
-		//PlanetData.PivotPlanet->ApplyGravitationalForce(-GravitationalForce);
 
 #if WITH_EDITOR
 		DrawDebugLine(GetWorld(), PlanetData.InfluencedPlanet->GetActorLocation(),

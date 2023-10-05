@@ -35,10 +35,6 @@ void APlanet::ApplyTangentialVelocity(const FVector& InTangentialVelocity)
 void APlanet::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// check(Mesh);
-	// Mesh->SetSimulatePhysics(true);
-	// Mesh->SetEnableGravity(false);
 	Coordinates = GetActorTransform().GetLocation();
 	Rotate();
 }
