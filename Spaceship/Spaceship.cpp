@@ -1,10 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "OuterWilds/Spaceship/Spaceship.h"
-
-#include "Camera/CameraComponent.h"
-#include "GameFramework/SpringArmComponent.h"
+#include <Camera/CameraComponent.h>
+#include <GameFramework/SpringArmComponent.h>
 
 ASpaceship::ASpaceship()
 {
@@ -23,6 +21,26 @@ ASpaceship::ASpaceship()
 void ASpaceship::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void ASpaceship::AddRotation_Implementation(const FVector& InRotation)
+{
+	if(InRotation.IsZero())
+	{
+		return;
+	}
+
+	Body->AddAngularImpulseInDegrees(InRotation);
+}
+
+void ASpaceship::AddPropulsion_Implementation(const FVector& InPropulsion)
+{
+	if(InPropulsion.IsZero())
+	{
+		return;
+	}
+	
+	Body->AddForce(InPropulsion);
 }
 
 void ASpaceship::ApplyGravitationalForce_Implementation(const FVector& InForce)

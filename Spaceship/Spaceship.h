@@ -5,6 +5,7 @@
 #include <CoreMinimal.h>
 #include <GameFramework/Pawn.h>
 
+#include "OuterWilds/Interfaces/ThrustersInterface.h"
 #include "OuterWilds/Planets/GravitationalObjectInterface.h"
 #include "Spaceship.generated.h"
 
@@ -12,7 +13,7 @@ class UCameraComponent;
 class USpringArmComponent;
 
 UCLASS()
-class OUTERWILDS_API ASpaceship : public APawn, public IGravitationalObjectInterface
+class OUTERWILDS_API ASpaceship : public APawn, public IGravitationalObjectInterface, public IThrustersInterface
 {
 	GENERATED_BODY()
 
@@ -28,9 +29,15 @@ protected:
 
 	/*Gravitational Object Interface functions implementation*/
 	UFUNCTION(BlueprintNativeEvent)
-	float GetPlanetMass() const;
+	float GetMass() const;
 	UFUNCTION(BlueprintNativeEvent)
 	void ApplyGravitationalForce(const FVector& InForce);
+
+	/*Thrusters Interface functions implementation*/
+	UFUNCTION(BlueprintNativeEvent)
+	void AddPropulsion(const FVector& InPropulsion);
+	UFUNCTION(BlueprintNativeEvent)
+	void AddRotation(const FVector& InRotation);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spaceship Components")
 	TObjectPtr<UStaticMeshComponent> Body;
@@ -42,7 +49,7 @@ protected:
 	TObjectPtr<UCameraComponent> Camera;
 };
 
-inline float ASpaceship::GetPlanetMass_Implementation() const
+inline float ASpaceship::GetMass_Implementation() const
 {
 	return Body->GetMass();
 }
